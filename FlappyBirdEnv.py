@@ -5,13 +5,13 @@ import pygame
 import random
 
 # Game settings
-SCREEN_WIDTH = 400
-SCREEN_HEIGHT = 800
-BIRD_WIDTH = 34
-BIRD_HEIGHT = 24
-PIPE_WIDTH = 60
-PIPE_HEIGHT = 750
-GAP_SIZE = 200
+SCREEN_WIDTH = 450
+SCREEN_HEIGHT = 750
+BIRD_WIDTH = 40
+BIRD_HEIGHT = 30
+PIPE_WIDTH = 80
+PIPE_HEIGHT = 700
+GAP_SIZE = 150
 
 class FlappyBirdEnv(gym.Env):
     metadata = {"render_modes": ["human"]}
@@ -70,7 +70,7 @@ class FlappyBirdEnv(gym.Env):
         self.bird["y"] += self.bird["velocity"]
 
         # Update pipes and score
-        if self.pipes[-1]["x"] < SCREEN_WIDTH // 1.6:
+        if self.pipes[-1]["x"] < SCREEN_WIDTH // 2:
             self.pipes.append(self._create_pipe())
         for pipe in self.pipes:
             pipe["x"] -= 3
@@ -100,7 +100,8 @@ class FlappyBirdEnv(gym.Env):
             self.bird["y"],
             self.bird["velocity"],
             next_pipe["x"] - self.bird["x"],
-            next_pipe["height"] + GAP_SIZE
+            next_pipe["height"] + GAP_SIZE - self.bird["y"],
+            self.bird["y"] - next_pipe["height"] 
         ], dtype=np.float32)
     
     def draw_bird(self):

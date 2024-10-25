@@ -9,16 +9,16 @@ def compute_action(state, weights):
     action_value = np.dot(weights, state)
     return [1, action_value] if action_value > 0 else [0, action_value]
 
+REWARD_LIMIT = 1000
 def simulate_episode(env, weights):
     state, _ = env.reset()
     total_reward = 0
     done = False
-    reward_limit = 1000
     while not done:
         action = compute_action(state, weights)[0]
         state, reward, done, _, _ = env.step(action)
         total_reward += reward
-        if total_reward > reward_limit:
+        if total_reward >= REWARD_LIMIT:
             break
     return total_reward
 
@@ -33,13 +33,15 @@ def simulated_annealing(env, initial_weights):
     
     for restart in range(max_restarts):
         temperature = initial_temperature
-        current_weights = 2 * np.random.rand(4) - 1.0
+        current_weights = 2 * np.random.rand(5) - 1.0
         best_weights = current_weights.copy()
         best_reward = -float('inf')
         noise_scale = 0.1
         
         while temperature > min_temperature:
             current_reward = simulate_episode(env, current_weights)
+            if current_reward == REWARD_LIMIT:
+                break
             new_weights = current_weights + np.random.normal(0, noise_scale, size=current_weights.shape)
             new_reward = simulate_episode(env, new_weights)
             
@@ -69,7 +71,7 @@ def simulated_annealing(env, initial_weights):
 
 # Initialize the environment and weights
 env = FlappyBirdEnv()
-initial_weights = 2 * np.random.rand(4) - 1.0
+initial_weights = 2 * np.random.rand(5) - 1.0
 
 # Run simulated annealing
 best_weights, best_reward = simulated_annealing(env, initial_weights)
@@ -94,7 +96,7 @@ while not done:
     total_reward += reward
     os.system('clear')
     print(f'state = {state} | | Weights = {best_weights}')
-    print(f'state = [bird y, bird y velocity, dist to next pipe, next pipe height]')
+    print(f'state = [bird y, bird y velocity, dist to next pipe, next lower pipe height difference, next higher pipe height difference ]')
     print(f'dot( state * weights ) = {action_value:.2f}   ({action})')
 
 print(f"Best episode finished with total reward: {total_reward}")
