@@ -2,8 +2,8 @@
 Flappy Bird, but Reinforcement Learning.
 
 
+![mr-flappy](https://github.com/user-attachments/assets/00075a29-3443-439a-823b-db2c6b2be4d5)
 
-![mr-flappy](https://github.com/user-attachments/assets/b608c825-7791-4ee4-8623-9754c7f9c9af)
 --
 
 If you want to run this, don't forget:
