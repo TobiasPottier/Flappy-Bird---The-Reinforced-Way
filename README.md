@@ -2,5 +2,4 @@
 Flappy Bird, but reinforced.
 
 
-https://github.com/user-attachments/assets/2128c2b3-f5e5-4c96-adeb-b7e5446164d2
-
+![mr-flappy](https://github.com/user-attachments/assets/8bb318ae-d494-4ea7-a220-fb0bce75ceb0)
