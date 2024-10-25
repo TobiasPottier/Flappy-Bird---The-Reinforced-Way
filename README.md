@@ -11,5 +11,5 @@ If you want to run this, don't forget:
 *pip install pygame numpy*
 
 ------
-if you're on windws, run: simulated_annealing_for_windows.py.
+If you're on windws, run: simulated_annealing_for_windows.py.
 otherwise, run: simulated_annealing.py.
