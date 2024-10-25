@@ -1,8 +1,8 @@
 # Flappy-Bird---The-Reinforced-Way
 Flappy Bird, but Reinforcement Learning.
 
+![mr-flappy](https://github.com/user-attachments/assets/79f3a425-162b-4fca-bca6-3f4fded8ade1)
 
-![mr-flappy](https://github.com/user-attachments/assets/00075a29-3443-439a-823b-db2c6b2be4d5)
 
 ------
 
