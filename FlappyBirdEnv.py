@@ -75,7 +75,7 @@ class FlappyBirdEnv(gym.Env):
         if self.pipes[-1]["x"] < SCREEN_WIDTH // 2:
             self.pipes.append(self._create_pipe())
         for pipe in self.pipes:
-            pipe["x"] -= 3
+            pipe["x"] -= 5
         
         # Check for collision or pass-through
         reward = 0
