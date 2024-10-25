@@ -21,9 +21,11 @@ class FlappyBirdEnv(gym.Env):
         self.bird_image = pygame.image.load("./assets/mr-flappy.png")
         self.top_pipe_image = pygame.image.load("./assets/mr-pipe copy.png")
         self.bottom_pipe_image = pygame.image.load("./assets/mr-pipe.png")
+        self.background_image = pygame.image.load("./assets/mr-background.png")
         self.bird_image = pygame.transform.scale(self.bird_image, (BIRD_WIDTH, BIRD_HEIGHT))
         self.top_pipe_image = pygame.transform.scale(self.top_pipe_image, (PIPE_WIDTH, PIPE_HEIGHT))
         self.bottom_pipe_image = pygame.transform.scale(self.bottom_pipe_image, (PIPE_WIDTH, PIPE_HEIGHT))
+        self.background_image = pygame.transform.scale(self.background_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
         self.pipes_passed = 0
         
@@ -119,7 +121,8 @@ class FlappyBirdEnv(gym.Env):
             self.screen.blit(self.bottom_pipe_image, (pipe["x"], bottom_pipe_y))
 
     def render(self, mode="human"):
-        self.screen.fill((0, 200, 0))
+        # Draw the background image
+        self.screen.blit(self.background_image, (0, 0))
 
         # Draw bird
         self.draw_bird()
