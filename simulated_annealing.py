@@ -37,10 +37,8 @@ def simulated_annealing(env, initial_weights):
         best_weights = current_weights.copy()
         best_reward = -float('inf')
         noise_scale = 0.1
-        count = 0
         
         while temperature > min_temperature:
-            count += 1
             current_reward = simulate_episode(env, current_weights)
             if current_reward == REWARD_LIMIT:
                 break
