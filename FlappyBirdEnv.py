@@ -32,7 +32,7 @@ class FlappyBirdEnv(gym.Env):
         # Actions: 0 = do nothing, 1 = flap
         self.action_space = spaces.Discrete(2)
         
-        # Observation space (you can expand this as needed)
+        # Observation space
         self.observation_space = spaces.Box(low=0, high=SCREEN_HEIGHT, shape=(4,), dtype=np.float32)
 
         # Initialize Pygame for rendering
@@ -59,7 +59,7 @@ class FlappyBirdEnv(gym.Env):
         self.score = 0
         self.done = False
 
-        # Initial state (e.g., bird position, velocity, next pipe distance)
+        # Initial state
         return self._get_state(), {}
 
     def step(self, action):
@@ -96,14 +96,14 @@ class FlappyBirdEnv(gym.Env):
         return self._get_state(), reward, self.done, False, {}
 
     def _get_state(self):
-        # Define state as bird's position, velocity, and distance to next pipe
+        # Define state
         next_pipe = next(pipe for pipe in self.pipes if not pipe["passed"])
         return np.array([
             self.bird["y"],
             self.bird["velocity"],
-            next_pipe["x"] - self.bird["x"],
-            next_pipe["height"] + GAP_SIZE - self.bird["y"],
-            self.bird["y"] - next_pipe["height"] 
+            next_pipe["x"] - self.bird["x"], # horizontal distance to next pipe
+            next_pipe["height"] + GAP_SIZE - self.bird["y"], # vertical distance to bottom pipe
+            self.bird["y"] - next_pipe["height"] # vertical distance to top pipe
         ], dtype=np.float32)
     
     def draw_bird(self):
@@ -132,7 +132,7 @@ class FlappyBirdEnv(gym.Env):
 
         # Display the number of pipes passed in the top left corner
         font = pygame.font.SysFont(None, 36)  # Define font and size
-        score_text = font.render(f"Score: {self.pipes_passed}", True, (0, 0, 0))  # Render text in white
+        score_text = font.render(f"Score: {self.pipes_passed}", True, (0, 0, 0))  # Render text
         self.screen.blit(score_text, (10, 10))
 
         # Update display
